@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
+﻿using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -18,7 +17,7 @@ var nativeNamespaces = await response.Content.ReadFromJsonAsync<Rdr3Natives>(new
 if (nativeNamespaces == null)
 {
     Console.WriteLine("Failed to compile RedM named natives.");
-    return;
+    return 1; // Exit with error code
 }
 
 Console.WriteLine("Found " + nativeNamespaces.Count + " namespaces.");
@@ -31,12 +30,12 @@ foreach (var (@namespace, natives) in nativeNamespaces)
     {
         if (string.IsNullOrEmpty(nativeData.Name))
         {
-            // Console.WriteLine("Skipping native with empty name.");
+            Debug.WriteLine($"Skipping native with empty name {nativeHash}");
             continue;
         }
         
         var nativeName = ConvertNameToNativeName(nativeData.Name);
-        // Console.WriteLine("Compiling native " + nativeName + " with hash " + nativeHash + "...");
+        Debug.WriteLine($"Compiling native {nativeName} with hash {nativeData.Hash}...");
         hashBuilder.AppendLine($"    {nativeName} = {nativeData.Hash}, -- [{@namespace}]");
     }
 }
@@ -46,7 +45,7 @@ var fileTemplate = File.ReadAllText("natives_template.lua");
 var fileOutput = fileTemplate.Replace("${hash_data}", hashOutput);
 
 File.WriteAllText("natives.lua", fileOutput);
-return;
+return 0; // Exit with success code
 
 string ConvertNameToNativeName(string name)
 {
