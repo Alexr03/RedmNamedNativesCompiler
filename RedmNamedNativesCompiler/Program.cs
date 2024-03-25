@@ -36,8 +36,8 @@ foreach (var (@namespace, natives) in nativeNamespaces)
         }
         
         var nativeName = ConvertNameToNativeName(nativeData.Name);
-        Console.WriteLine("Compiling native " + nativeName + " with hash " + nativeHash + "...");
-        hashBuilder.AppendLine($"    {ConvertNameToNativeName(nativeData.Name)} = {nativeData.Hash}, -- [{@namespace}]");
+        // Console.WriteLine("Compiling native " + nativeName + " with hash " + nativeHash + "...");
+        hashBuilder.AppendLine($"    {nativeName} = {nativeData.Hash}, -- [{@namespace}]");
     }
 }
 
