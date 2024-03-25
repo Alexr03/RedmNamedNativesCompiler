@@ -21,7 +21,7 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --no-restore -c Release --output ./output
+        run: dotnet build RedmNamedNativesCompiler --no-restore -c Release --output ./output
         
       - name: Set Working Directory
         run: cd ./output
