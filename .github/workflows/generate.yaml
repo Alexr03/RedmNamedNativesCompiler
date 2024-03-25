@@ -25,8 +25,7 @@ jobs:
         
       - name: Set Working Directory
         run: |
-          ls
-          cd ./output
+          cd output
           ls
       
       - name: Execute App
