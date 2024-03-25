@@ -22,10 +22,15 @@ jobs:
 
       - name: Build
         run: dotnet build --no-restore -c Release
+        
+      - name: Set Working Directory
+        run: cd RedmNamedNativesCompiler/RedmNamedNativesCompiler/bin/Release/net8.0
       
-      # Assuming your application automatically generates natives.lua upon running:
       - name: Execute App
-        run: dotnet run --project RedmNamedNativesCompiler/RedmNamedNativesCompiler.csproj --configuration Release
+        run: dotnet run RedmNamedNativesCompiler.dll
+        
+      - name: Set Working Directory
+        run: cd ../../../../../
 
       - name: Archive natives.lua
         uses: actions/upload-artifact@v2
