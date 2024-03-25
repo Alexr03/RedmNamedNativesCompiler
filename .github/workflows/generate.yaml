@@ -27,7 +27,7 @@ jobs:
         run: cd ./output
       
       - name: Execute App
-        run: dotnet run RedmNamedNativesCompiler.dll
+        run: dotnet RedmNamedNativesCompiler.dll
 
       - name: Archive natives.lua
         uses: actions/upload-artifact@v2
