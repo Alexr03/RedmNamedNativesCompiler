@@ -24,7 +24,10 @@ jobs:
         run: dotnet build RedmNamedNativesCompiler --no-restore -c Release --output ./output
         
       - name: Set Working Directory
-        run: cd ./output
+        run: |
+          ls
+          cd ./output
+          ls
       
       - name: Execute App
         run: dotnet RedmNamedNativesCompiler.dll
