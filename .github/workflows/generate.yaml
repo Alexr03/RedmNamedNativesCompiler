@@ -22,20 +22,16 @@ jobs:
 
       - name: Build
         run: dotnet build RedmNamedNativesCompiler --no-restore -c Release --output ./output
-        
-      - name: Set Working Directory
-        run: |
-          cd output
-          ls
       
       - name: Execute App
         run: dotnet RedmNamedNativesCompiler.dll
+        working-directory: ./output
 
       - name: Archive natives.lua
         uses: actions/upload-artifact@v2
         with:
           name: natives-lua
-          path: natives.lua
+          path: ./output/natives.lua
 
       - name: Create Release
         id: create_release

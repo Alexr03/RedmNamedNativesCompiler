@@ -31,7 +31,7 @@ foreach (var (@namespace, natives) in nativeNamespaces)
     {
         if (string.IsNullOrEmpty(nativeData.Name))
         {
-            Console.WriteLine("Skipping native with empty name.");
+            // Console.WriteLine("Skipping native with empty name.");
             continue;
         }
         
